@@ -1,4 +1,4 @@
-import React from 'react';
+import PropTypes from 'prop-types';
 
 const images = [
   { value: 0, src: "https://i.ibb.co/5rDRw30/symbols-01.jpg" },
@@ -25,5 +25,11 @@ function VariableSelector({ variable, value, onSelect }) {
     </div>
   );
 }
+
+VariableSelector.propTypes = {
+  variable: PropTypes.string.isRequired,
+  value: PropTypes.number.isRequired,
+  onSelect: PropTypes.func.isRequired
+};
 
 export default VariableSelector;

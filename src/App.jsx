@@ -1,6 +1,13 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 import './App.css';
+import note00 from './assets/00.svg';
+import note10 from './assets/10.svg';
+import note11 from './assets/11.svg';
+import note20 from './assets/20.svg';
+import note21 from './assets/21.svg';
+import note22 from './assets/22.svg';
+import bgImage from './assets/bg.jpg';
 
 function App() {
   const [selectedValues, setSelectedValues] = useState({
@@ -10,12 +17,12 @@ function App() {
   });
 
   const symbols = [
-    { value: 0,  image: 'https://i.ibb.co/5rDRw30/symbols-01.jpg' },
-    { value: 10, image: 'https://i.ibb.co/PFmbJ00/symbols-02.jpg' },
-    { value: 11, image: 'https://i.ibb.co/FqXw4mG/symbols-03.jpg' },
-    { value: 20, image: 'https://i.ibb.co/TrNY7Qf/symbols-04.jpg' },
-    { value: 21, image: 'https://i.ibb.co/jfYKRth/symbols-05.jpg' },
-    { value: 22, image: 'https://i.ibb.co/bXGth05/symbols-06.jpg' }
+    { value: 0,  image: note00, background: bgImage },
+    { value: 10, image: note10, background: bgImage },
+    { value: 11, image: note11, background: bgImage },
+    { value: 20, image: note20, background: bgImage },
+    { value: 21, image: note21, background: bgImage },
+    { value: 22, image: note22, background: bgImage },
   ];
 
   const handleSelect = (variable, value) => {
@@ -44,13 +51,17 @@ function App() {
       {symbols.map((symbol) => (
         <div 
           key={symbol.value}
-          className="image-option"
+          className={`image-option ${selectedValues[name.toLowerCase()] === symbol.value ? 'selected' : ''}`}
           onClick={() => handleSelect(name.toLowerCase(), symbol.value)}
+          style={{
+            backgroundImage: `url(${symbol.background})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center'
+          }}
         >
           <img
             src={symbol.image}
             alt={`Value ${symbol.value}`}
-            className={selectedValues[name.toLowerCase()] === symbol.value ? 'selected' : ''}
           />
         </div>
       ))}
