@@ -1,0 +1,141 @@
+@font-face {
+  font-family: 'Call of Ops Duty';
+  src: url('./fonts/Call-of-Ops-Duty.otf') format('opentype');
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  background-image: url('./assets/bo6-zumbis.jpg');
+  background-size: contain;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-color: #000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+h1 {
+  margin-top: 30px;
+  margin-bottom: 1vh;
+  font-size: 2rem;
+  color: white;
+  text-align: center;
+  font-family: 'Call of Ops Duty', sans-serif;
+}
+
+h2 {
+  margin-bottom: 15px;
+  font-size: 1.2rem;
+  color: white;
+  text-align: center;
+  font-family: 'Call of Ops Duty', sans-serif;
+}
+
+.main-container {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.content-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.variables-container {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  width: 100%;
+  max-width: 600px;
+  align-items: center;
+}
+
+.variable {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin: 0;
+  width: 100%;
+  font-family: 'Call of Ops Duty', sans-serif;
+}
+
+.image-option {
+  position: relative;
+  cursor: pointer;
+  border: 3px solid transparent;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  margin: 5px;
+}
+
+.image-option.selected {
+  border-color: white;
+  box-shadow: 0 0 10px rgba(255, 255, 0, 0.5);
+}
+
+.image-option:hover {
+  transform: scale(1.05);
+}
+
+.image-option img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+.results-container {
+  width: 80%;
+  margin-top: 0.5rem;
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 8px;
+}
+
+.results-row {
+  display: flex;
+  gap: 2.5rem;
+  justify-content: center;
+}
+
+.results-row p {
+  text-align: center;
+}
+
+.footer {
+  margin-top: 20px;
+  margin-bottom: 5vh;
+  text-align: center;
+  font-size: 0.7rem;
+  color: #fff;
+  font-family: 'Call of Ops Duty', sans-serif;
+}
+
+.copyright {
+  color: white;
+  text-decoration: none;
+}
+
+@media (max-width: 400px) {
+  img {
+    width: 50px; 
+    height: 50px;
+  }
+
+  h1 {
+    font-size: 1rem;
+  }
+} 

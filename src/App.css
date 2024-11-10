@@ -223,3 +223,8 @@ h2 {
 .variable h2 {
   font-size: 4rem;
 }
+
+.copyright {
+  color: white;
+  text-decoration: none;
+}

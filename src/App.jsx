@@ -89,37 +89,43 @@ function App() {
           <Variable name="Z" />
         </div>
 
-        <div className="results-container" style={{
-          alignSelf: 'flex-end',
-          marginRight: '2rem'
-        }}>
-          <div className="results-row">
-            {results && (
-              <>
-                <div className="result-box">
-                  <p id="result1">
-                    <strong style={{ fontSize: '2.5rem' }}>{results.result1}</strong>
-                  </p>
-                </div>
-                <div className="result-box">
-                  <p id="result2">
-                    <strong style={{ fontSize: '2.5rem' }}>{results.result2}</strong>
-                  </p>
-                </div>
-                <div className="result-box">
-                  <p id="result3">
-                    <strong style={{ fontSize: '2.5rem' }}>{results.result3}</strong>
-                  </p>
-                </div>
-              </>
-            )}
+        {results && results.result1 && results.result2 && results.result3 && (
+          <div className="results-container" style={{
+            alignSelf: 'flex-end',
+            marginRight: '2rem'
+          }}>
+            <div className="results-row">
+              <div className="result-box">
+                <p id="result1">
+                  <strong style={{ fontSize: '2.5rem' }}>{results.result1}</strong>
+                </p>
+              </div>
+              <div className="result-box">
+                <p id="result2">
+                  <strong style={{ fontSize: '2.5rem' }}>{results.result2}</strong>
+                </p>
+              </div>
+              <div className="result-box">
+                <p id="result3">
+                  <strong style={{ fontSize: '2.5rem' }}>{results.result3}</strong>
+                </p>
+              </div>
+            </div>
           </div>
-        </div>
+        )}
       </div>
 
       <div className="footer">
         <p>
-        <a target="_blank" rel="noreferrer" className="copyright" href="https://github.com/DanielSantanaSilva">© Daniel Santana (GitHub)</a>
+          <a 
+            target="_blank" 
+            rel="noreferrer" 
+            className="copyright" 
+            href="https://github.com/DanielSantanaSilva"
+            style={{ color: 'white' }}
+          >
+            © Daniel Santana (GitHub)
+          </a>
         </p>
       </div>
     </div>
