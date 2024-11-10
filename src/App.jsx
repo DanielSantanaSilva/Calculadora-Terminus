@@ -74,7 +74,7 @@ function App() {
 
   return (
     <div className="main-container">
-      <h1>CALCULADORA TERMINUS (Zumbis - BO6)</h1>    
+      <h1>CALCULADORA TERMINUS</h1>
       <h2>Selecione valores para X, Y e Z</h2>
 
       <div className="content-wrapper" style={{
