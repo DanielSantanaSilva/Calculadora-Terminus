@@ -47,7 +47,7 @@ function App() {
 
   const Variable = ({ name }) => (
     <div className="variable" id={`${name.toLowerCase()}-variables`}>
-      <h2>{name}:</h2>
+      <h2 style={{ fontSize: '2rem' }}>{name}:</h2>
       {symbols.map((symbol) => (
         <div 
           key={symbol.value}
@@ -73,32 +73,59 @@ function App() {
   };
 
   return (
-    <>
-      <h1>Calculadora Terminus (Zumbis - BO6)</h1>    
+    <div className="main-container">
+      <h1>CALCULADORA TERMINUS (Zumbis - BO6)</h1>    
       <h2>Selecione valores para X, Y e Z</h2>
 
-      <div className="variables-container">
-        <Variable name="X" />
-        <Variable name="Y" />
-        <Variable name="Z" />
-      </div>
+      <div className="content-wrapper" style={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        gap: '0.5rem'
+      }}>
+        <div className="variables-container">
+          <Variable name="X" />
+          <Variable name="Y" />
+          <Variable name="Z" />
+        </div>
 
-      <div id="results">
-        <h3>Resultado:</h3>
-        <p id="result1">1° Numero: {results && <strong>{results.result1}</strong>}</p>
-        <p id="result2">2° Numero: {results && <strong>{results.result2}</strong>}</p>
-        <p id="result3">3° Numero: {results && <strong>{results.result3}</strong>}</p>
+        <div className="results-container" style={{
+          alignSelf: 'flex-end',
+          marginRight: '2rem'
+        }}>
+          <div className="results-row">
+            {results && (
+              <>
+                <div className="result-box">
+                  <p id="result1">
+                    <strong style={{ fontSize: '2.5rem' }}>{results.result1}</strong>
+                  </p>
+                </div>
+                <div className="result-box">
+                  <p id="result2">
+                    <strong style={{ fontSize: '2.5rem' }}>{results.result2}</strong>
+                  </p>
+                </div>
+                <div className="result-box">
+                  <p id="result3">
+                    <strong style={{ fontSize: '2.5rem' }}>{results.result3}</strong>
+                  </p>
+                </div>
+              </>
+            )}
+          </div>
+        </div>
       </div>
 
       <div className="footer">
         <p>
-          <a href="https://github.com/DanielSantanaSilva" target="_blank" rel="noopener noreferrer">
-          Criado por Daniel Santana
-          </a>
+        <a target="_blank" rel="noreferrer" className="copyright" href="https://github.com/DanielSantanaSilva">© Daniel Santana (GitHub)</a>
         </p>
       </div>
-    </>
+    </div>
   );
 }
 
 export default App;
+
+
