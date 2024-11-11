@@ -204,19 +204,21 @@ h2 {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start;
     padding: 1rem 0;
   }
 
   .main-container h1 {
-    font-size: 1.2rem;
+    font-size: 0.9rem;
     padding: 0 1rem;
     margin-bottom: 0.5rem;
+    margin-top: 10px;
   }
 
   .main-container h2 {
     font-size: 1rem;
-    margin-bottom: 1rem;
+    margin-bottom: 2.5rem;
+    margin-top: 200px;
   }
 
   /* Container principal do conteúdo */
@@ -226,17 +228,19 @@ h2 {
     flex-direction: column;
     justify-content: center;
     padding: 0 1rem;
+    gap: 0rem;
   }
 
   .variables-container {
     width: 100%;
-    max-width: 280px;
+    max-width: 50px;
     margin: 0 auto;
+    gap: 0rem;
   }
 
   /* Ajustes dos símbolos */
   .variable {
-    margin-bottom: 1.2rem;
+    margin-bottom: 0rem;
   }
 
   .variable h2 {
@@ -247,8 +251,9 @@ h2 {
   .symbols-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 0.3rem;
+    gap: 0.5rem;
     justify-items: center;
+    margin-bottom: 0.5rem;
   }
 
   .image-option {
@@ -269,7 +274,7 @@ h2 {
   .results-container {
     width: 100%;
     margin-top: 1.5rem;
-    margin-bottom: 4rem;
+    margin-bottom: 6rem;
   }
 
   .results-row {
@@ -288,17 +293,17 @@ h2 {
 
   /* Footer */
   .footer {
-    padding: 1rem;
+    padding: 1.5rem;
     margin-top: auto;
   }
 
   .footer a {
-    font-size: 0.9rem;
+    font-size: 0.5rem;
   }
 
   #results {
     position: fixed;
-    top: 10px;
+    top: 5px;
     left: 50%;
     transform: translateX(-50%);
     z-index: 100;
@@ -312,6 +317,38 @@ h2 {
     padding: 0.3em;
     margin: 0 0.1em;
   }
+
+  body {
+    background-position: top 80px center;
+    background-size: 400px auto;
+    background-attachment: scroll;
+  }
+
+  /* Adiciona margem extra quando não há resultados */
+  .symbols-grid:last-child {
+    margin-bottom: 3rem;
+  }
+
+  .variable {
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  .variables-container {
+    width: 100%;
+    max-width: 50px;
+    margin: 0 auto;
+    gap: 0;
+  }
+
+  .content-wrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 1rem;
+    gap: 0;
+  }
 }
 
 /* Estilo para desktop (telas > 768px) */
@@ -319,13 +356,13 @@ h2 {
   margin-bottom: 3rem;
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 0.5rem;
 }
 
 .variable h2 {
   font-size: 4rem;
   margin: 0;
-  min-width: 2rem;
+  min-width: 3rem;
 }
 
 .symbols-grid {
@@ -357,7 +394,7 @@ h2 {
   .symbols-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 0.6rem;
+    gap: 2rem;
     justify-items: center;
   }
 
@@ -368,7 +405,7 @@ h2 {
   .variable {
     flex-direction: row;
     align-items: center;
-    gap: 1rem;
+    gap: 0.5rem;
   }
 
   .variable h2 {
