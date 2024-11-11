@@ -1,6 +1,6 @@
 @font-face {
-  font-family: 'Call of Ops Duty';
-  src: url('./fonts/Call-of-Ops-Duty.otf') format('opentype');
+  font-family: 'Call of Duty';
+  src: url('./fonts/CallOfDuty.ttf') format('truetype');
 }
 
 body {
@@ -23,7 +23,7 @@ body {
 }
 
 h1 {
-  margin-top: 30px;
+  margin-top: 10px;
   margin-bottom: 1vh;
   font-size: 2rem;
   color: white;
@@ -39,23 +39,20 @@ h2 {
 }
 
 .variables-container {
-  margin-top: 40px;
+  margin-top: 5px;
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 2px;
   width: 100%;
   max-width: 600px;
   align-items: center;
 }
 
 .variable {
+  margin-bottom: 0.5rem;
   display: flex;
   align-items: center;
-  justify-content: center;
-  text-align: center;
-  margin: 0;
-  width: 100%;
-  font-family: 'Call of Ops Duty', sans-serif;
+  gap: 0.5rem;
 }
 
 .image-option {
@@ -86,39 +83,8 @@ h2 {
 .symbols-container {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 5px;
   justify-content: center;
-}
-
-#results {
-  margin: 20px auto;
-  text-align: center;
-  width: 700px;
-  background: rgba(0, 0, 0, 0.85);
-  padding: 15px;
-  border-radius: 10px;
-  box-shadow: 0 0 15px rgba(33, 150, 243, 0.3);
-  position: relative;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-#results h3 {
-  margin-bottom: 10px;
-  font-size: 2rem;
-  color: #fff;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  font-family: 'Call of Ops Duty', sans-serif;
-}
-
-#results p {
-  font-size: 1.5rem;
-  font-weight: 700;
-  margin: 8px 0;
-  color: #fff;
-  font-family: 'Call of Ops Duty', sans-serif;
 }
 
 #results span {
@@ -140,8 +106,11 @@ h2 {
 }
 
 .footer {
-  margin-top: 20px;
-  margin-bottom: 5vh;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 20px;
   text-align: center;
   font-size: 0.7rem;
   color: #fff;
@@ -186,6 +155,7 @@ h2 {
   top: 10px;
   left: 50%;
   transform: translateX(-50%);
+  font-family: 'Terminus', monospace;
 }
 
 @media (max-width: 480px) {
@@ -227,4 +197,191 @@ h2 {
 .copyright {
   color: white;
   text-decoration: none;
+}
+
+@media (max-width: 768px) {
+  .main-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1rem 0;
+  }
+
+  .main-container h1 {
+    font-size: 1.2rem;
+    padding: 0 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .main-container h2 {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  /* Container principal do conteúdo */
+  .content-wrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 1rem;
+  }
+
+  .variables-container {
+    width: 100%;
+    max-width: 280px;
+    margin: 0 auto;
+  }
+
+  /* Ajustes dos símbolos */
+  .variable {
+    margin-bottom: 1.2rem;
+  }
+
+  .variable h2 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .symbols-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.3rem;
+    justify-items: center;
+  }
+
+  .image-option {
+    width: 45px !important;
+    height: 45px !important;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .image-option img {
+    width: 80% !important;
+    height: 80% !important;
+  }
+
+  /* Container dos resultados */
+  .results-container {
+    width: 100%;
+    margin-top: 1.5rem;
+    margin-bottom: 4rem;
+  }
+
+  .results-row {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+  }
+
+  .result-box {
+    min-width: 60px;
+  }
+
+  .result-box strong {
+    font-size: 1.5rem !important;
+  }
+
+  /* Footer */
+  .footer {
+    padding: 1rem;
+    margin-top: auto;
+  }
+
+  .footer a {
+    font-size: 0.9rem;
+  }
+
+  #results {
+    position: fixed;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 100;
+    width: 90%;
+    text-align: center;
+  }
+  
+  #results span {
+    min-width: 35px;
+    min-height: 35px;
+    padding: 0.3em;
+    margin: 0 0.1em;
+  }
+}
+
+/* Estilo para desktop (telas > 768px) */
+.variable {
+  margin-bottom: 3rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.variable h2 {
+  font-size: 4rem;
+  margin: 0;
+  min-width: 2rem;
+}
+
+.symbols-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.image-option {
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.image-option img {
+  width: 90%;
+  height: 90%;
+}
+
+/* Mantém os estilos mobile existentes */
+@media (max-width: 768px) {
+  .variable {
+    display: block;
+  }
+
+  .symbols-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.6rem;
+    justify-items: center;
+  }
+
+  /* ... resto do seu CSS mobile ... */
+}
+
+@media (min-width: 768px) {
+  .variable {
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .variable h2 {
+    min-width: 2rem;
+  }
+
+  .symbols-grid {
+    flex-wrap: nowrap;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .variables-container {
+    gap: 0.2rem !important;
+  }
 }
