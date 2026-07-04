@@ -1,6 +1,15 @@
-import { useState } from 'react';
-import PropTypes from 'prop-types';
+import { useState, useEffect, useRef } from 'react';
 import './App.css';
+import VariableSelector from './components/VariableSelector';
+import Results from './components/Results';
+import {
+  playClick,
+  playSuccess,
+  playReset,
+  toggleMute,
+  getMuteState
+} from './utils/audio';
+
 import note00 from './assets/00.svg';
 import note10 from './assets/10.svg';
 import note11 from './assets/11.svg';
@@ -16,6 +25,9 @@ function App() {
     z: null
   });
 
+  const [muted, setMuted] = useState(getMuteState());
+  const prevIsComplete = useRef(false);
+
   const symbols = [
     { value: 0,  image: note00, background: bgImage },
     { value: 10, image: note10, background: bgImage },
@@ -26,146 +38,127 @@ function App() {
   ];
 
   const handleSelect = (variable, value) => {
+    playClick();
     setSelectedValues(prev => ({
       ...prev,
       [variable]: value
     }));
   };
 
-  const calculateResults = () => {
-    const { x, y, z } = selectedValues;
-    if (x === null || y === null || z === null) return null;
-
-    return {
-      result1: Math.abs((x * 2) + 11),
-      result2: Math.abs((z * 2) + y - 5),
-      result3: Math.abs((z + y) - x)
-    };
+  const handleReset = () => {
+    playReset();
+    setSelectedValues({
+      x: null,
+      y: null,
+      z: null
+    });
   };
 
-  const results = calculateResults();
-
-  const Variable = ({ name }) => (
-    <div className="variable" id={`${name.toLowerCase()}-variables`}>
-      <h2 style={{ fontSize: '2rem', textShadow: '-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000' }}>{name}:</h2>
-      <div className="symbols-grid">
-        {symbols.map((symbol) => (
-          <div 
-            key={symbol.value}
-            className={`image-option ${selectedValues[name.toLowerCase()] === symbol.value ? 'selected' : ''}`}
-            onClick={() => handleSelect(name.toLowerCase(), symbol.value)}
-            style={{
-              backgroundImage: `url(${symbol.background})`,
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-              width: '80px',
-              height: '80px'
-            }}
-          >
-            <img
-              src={symbol.image}
-              alt={`Value ${symbol.value}`}
-              style={{ width: '90%', height: '90%' }}
-            />
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-
-  Variable.propTypes = {
-    name: PropTypes.string.isRequired
+  const handleToggleMute = () => {
+    const nextMuted = toggleMute();
+    setMuted(nextMuted);
+    if (!nextMuted) {
+      // Play a quick feedback click when unmuting
+      setTimeout(() => playClick(), 50);
+    }
   };
+
+  // Play success sound when all values are selected
+  const isComplete = selectedValues.x !== null && selectedValues.y !== null && selectedValues.z !== null;
+  useEffect(() => {
+    if (isComplete && !prevIsComplete.current) {
+      playSuccess();
+    }
+    prevIsComplete.current = isComplete;
+  }, [isComplete]);
 
   return (
-    <div className="main-container" style={{ 
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      gap: '0.5rem',
-      padding: '0 1rem',
-      minHeight: '100vh'
-    }}>
-      <h1 style={{ 
-        fontFamily: "'Call of Duty', monospace", 
-        fontSize: '3rem', 
-        textAlign: 'center', 
-        padding: '0 1rem',
-        textShadow: '-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000'
-      }}>
-        CALLCULATOR TERMINUS
-      </h1>    
-      <h2 style={{ textShadow: '-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000', fontSize: '1rem', textAlign: 'center' }}>
-        Selecione valores para X, Y e Z
-      </h2>
+    <div className="app-container">
+      {/* Background scanline effect overlay */}
+      <div className="scanlines"></div>
 
-      <div className="content-wrapper" style={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        gap: window.innerWidth >= 768 ? '0.01rem' : '0.2rem',
-        padding: '0 1rem',
-        flex: '1'
-      }}>
-        <div className="variables-container" style={{
-          width: '100%',
-          maxWidth: '400px',
-          display: 'flex',
-          flexDirection: 'column',
-          gap: window.innerWidth >= 768 ? '0.01rem' : '0.2rem'
-        }}>
-          <Variable name="X" />
-          <Variable name="Y" />
-          <Variable name="Z" />
+      <header className="app-header">
+        <div className="header-hud">
+          <div className="hud-badge">SYS_ONLINE</div>
+          <div className="hud-title-wrapper">
+            <h1 className="hud-title">CALCULADORA TERMINUS</h1>
+            <p className="hud-subtitle">BLACK OPS 6 ZOMBIES DECIPHER PROTOCOL</p>
+          </div>
+          <button 
+            className={`audio-toggle-btn ${muted ? 'muted' : ''}`}
+            onClick={handleToggleMute}
+            title={muted ? 'Ativar som' : 'Silenciar'}
+          >
+            {muted ? '🔇' : '🔊'}
+          </button>
+        </div>
+      </header>
+
+      <main className="app-main">
+        {/* Helper Panel */}
+        <section className="map-reference">
+          <div className="reference-title">
+            <span className="blink-slow">&bull;</span> MANUAL DE OPERAÇÃO
+          </div>
+          <p className="reference-text">
+            Encontre os 3 símbolos nas salas do mapa <strong>Terminus</strong> (X, Y e Z). Insira seus valores correspondentes abaixo. O terminal executará as equações e descriptografará a senha do computador de laboratório.
+          </p>
+        </section>
+
+        {/* Variables selector grids */}
+        <div className="selectors-container">
+          <VariableSelector
+            name="X"
+            selectedValue={selectedValues.x}
+            symbols={symbols}
+            onSelect={(val) => handleSelect('x', val)}
+          />
+          <VariableSelector
+            name="Y"
+            selectedValue={selectedValues.y}
+            symbols={symbols}
+            onSelect={(val) => handleSelect('y', val)}
+          />
+          <VariableSelector
+            name="Z"
+            selectedValue={selectedValues.z}
+            symbols={symbols}
+            onSelect={(val) => handleSelect('z', val)}
+          />
         </div>
 
-        {results && results.result1 && results.result2 && results.result3 && (
-          <div className="results-container" style={{
-            width: '100%',
-            marginTop: window.innerWidth >= 768 ? '-1rem' : '-0.5rem'
-          }}>
-            <div className="results-row" style={{
-              display: 'flex',
-              justifyContent: 'space-around',
-              gap: '0.5rem'
-            }}>
-              {[results.result1, results.result2, results.result3].map((result, index) => (
-                <div key={index} className="result-box" style={{
-                  padding: '0.5rem',
-                  minWidth: '50px',
-                  textAlign: 'center',
-                  textShadow: '-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000'
-                }}>
-                  <p id={`result${index + 1}`}>
-                    <strong style={{ fontSize: '1.5rem' }}>{result}</strong>
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-      </div>
-
-      <div className="footer" style={{ 
-        padding: '1rem',
-        marginTop: window.innerWidth >= 768 ? 'auto' : '1rem'
-      }}>
-        <p>
-          <a 
-            target="_blank" 
-            rel="noreferrer" 
-            className="copyright" 
-            href="https://github.com/DanielSantanaSilva"
-            style={{ color: 'white', fontSize: '0.9rem' }}
+        {/* Action Bar (Reset) */}
+        <div className="actions-bar">
+          <button 
+            className="reset-btn"
+            onClick={handleReset}
+            disabled={selectedValues.x === null && selectedValues.y === null && selectedValues.z === null}
           >
-            © Daniel Santana (GitHub)
-          </a>
-        </p>
-      </div>
+            LIMPAR SELEÇÕES
+          </button>
+        </div>
+
+        {/* Decryption Terminal Results */}
+        <Results
+          x={selectedValues.x}
+          y={selectedValues.y}
+          z={selectedValues.z}
+          onCopySound={playClick}
+        />
+      </main>
+
+      <footer className="app-footer">
+        <a 
+          href="https://github.com/DanielSantanaSilva"
+          target="_blank" 
+          rel="noreferrer" 
+          className="footer-link"
+        >
+          &copy; Daniel Santana - GitHub Project Repository
+        </a>
+      </footer>
     </div>
   );
 }
 
 export default App;
-
-
